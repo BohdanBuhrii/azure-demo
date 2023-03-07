@@ -35,3 +35,12 @@ az network public-ip show \
   --name LoadBalancerFrontEnd \
   --query [ipAddress] \
   --output tsv
+
+
+  Create vm scale set
+  Go through the settings
+  Try to connect
+  Setup network rules
+  Deploy nginx
+  Show how to troubleshot
+  Try to deploy server

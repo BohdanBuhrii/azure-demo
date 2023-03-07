@@ -1,0 +1,4 @@
+{
+  "fileUris": ["https://raw.githubusercontent.com/BohdanBuhrii/azure-demo/test1/script.sh"],
+  "commandToExecute": "./script.sh"
+}

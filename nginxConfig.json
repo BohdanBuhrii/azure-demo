@@ -1,4 +1,4 @@
 {
-  "fileUris": ["https://raw.githubusercontent.com/Azure-Samples/compute-automation-configurations/master/automate_nginx.sh"],
+  "fileUris": ["https://raw.githubusercontent.com/BohdanBuhrii/azure-demo/test1/automate_nginx.sh"],
   "commandToExecute": "./automate_nginx.sh"
 }
