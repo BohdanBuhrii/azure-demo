@@ -34,7 +34,7 @@ printf "
 Description=AspNet Web App running on Ubuntu
 [Service]
 WorkingDirectory=/var/www/market-app
-ExecStart=/usr/bin/dotnet /var/www/market-appMarket.dll
+ExecStart=/usr/bin/dotnet /var/www/market-app/Market.dll
 Restart=always
 RestartSec=10
 SyslogIdentifier=dotnet-demo
