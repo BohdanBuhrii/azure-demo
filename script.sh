@@ -1,23 +1,21 @@
 echo "Installing DotNet sdk"
 
-#sudo apt-get update
-#sudo apt-get install -y apt-transport-https
-#sudo apt-get install dotnet-sdk-6.0
-#Y
-
-#sudo apt-get install apache2
-#Y
-#sudo a2enmod proxy proxy_http proxy_html
+sudo apt-get update
+sudo apt-get install -y apt-transport-https
+sudo apt-get install -y dotnet-sdk-6.0
 
 echo "Publishing application"
 
-#git clone https://github.com/BohdanBuhrii/azure-demo.git
-#cd azure-demo
-#git checkout test1
+git clone https://github.com/BohdanBuhrii/azure-demo.git
+cd azure-demo
+git checkout test1
+cd Market/
 
 dotnet publish -c Release -o /var/www/market-app
 
 echo "Setting up Apache"
+sudo apt-get install -y apache2
+sudo a2enmod proxy proxy_http proxy_html
 
 sudo printf "<VirtualHost *:80>  
    ProxyPreserveHost On  
@@ -46,8 +44,9 @@ WantedBy=multi-user.target
 " > /etc/systemd/system/kestrel-DotNetApp.service
 
 sudo systemctl enable kestrel-DotNetApp.service 
-#sudo systemctl daemon-reload 
 sudo systemctl start kestrel-DotNetApp.service
+
+#sudo systemctl daemon-reload 
 #sudo systemctl status kestrel-DotNetApp.service
 
 sudo systemctl restart apache2 
