@@ -31,7 +31,7 @@ namespace Market.Controllers
     }
 
     [HttpGet("test")]
-    public IEnumerable<WeatherForecast> Get()
+    public string Get()
     {
       return "This is test message";
     }
