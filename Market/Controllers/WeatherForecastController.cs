@@ -31,7 +31,7 @@ namespace Market.Controllers
     }
 
     [HttpGet("test")]
-    public string Get()
+    public string GetTest()
     {
       return "This is test message";
     }
