@@ -1,0 +1,37 @@
+https://portal.azure.com/#cloudshell/
+
+sudo apt-get install azure-cli
+
+az group create --name myResourceGroupScale --location eastus
+
+az vmss create \
+  --resource-group myResourceGroupScale \
+  --name myScaleSet \
+  --image UbuntuLTS \
+  --orchestration-mode Flexible \
+  --admin-username azureuser \
+  --generate-ssh-keys
+
+az vmss extension set \
+  --publisher Microsoft.Azure.Extensions \
+  --version 2.0 \
+  --name CustomScript \
+  --resource-group scaleSetTest \
+  --vmss-name eva \
+  --settings nginxConfig.json
+
+az network lb rule create \
+  --resource-group myResourceGroupScale \
+  --name myLoadBalancerRuleWeb \
+  --lb-name myScaleSetLB \
+  --backend-pool-name myScaleSetLBBEPool \
+  --backend-port 80 \
+  --frontend-ip-name loadBalancerFrontEnd \
+  --frontend-port 80 \
+  --protocol tcp
+
+az network public-ip show \
+  --resource-group scaleSetTest \
+  --name LoadBalancerFrontEnd \
+  --query [ipAddress] \
+  --output tsv

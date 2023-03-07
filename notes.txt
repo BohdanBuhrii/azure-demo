@@ -3,6 +3,7 @@ http://172.174.208.116/
 ssh evaadmin@172.174.208.116
 
 sudo apt-get update
+sudo apt-get install apt-transport-https
 sudo apt-get install dotnet-sdk-6.0
 
 git clone https://github.com/BohdanBuhrii/azure-demo.git
@@ -47,6 +48,8 @@ sudo systemctl daemon-reload
 
 sudo systemctl restart apache2 
 sudo service apache2 restart
+
+sudo systemctl status apache2
 
 curl -i -H "Accept: application/json" -H "Content-Type: application/json" http://127.0.0.1:5000/WeatherForecast
 
