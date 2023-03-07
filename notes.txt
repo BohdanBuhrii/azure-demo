@@ -1,0 +1,52 @@
+http://172.174.208.116/
+
+ssh evaadmin@172.174.208.116
+
+sudo apt-get update
+sudo apt-get install dotnet-sdk-6.0
+
+git clone https://github.com/BohdanBuhrii/azure-demo.git
+git checkout test1
+
+dotnet publish -c Release -o /var/www/market-app
+
+sudo apt-get install apache2
+sudo a2enmod proxy proxy_http proxy_html
+sudo systemctl restart apache2
+
+sudo vim /etc/apache2/conf-enabled/DotNetApp.conf
+
+<VirtualHost *:80>  
+   ProxyPreserveHost On  
+   ProxyPass / http://127.0.0.1:5000/  
+   ProxyPassReverse / http://127.0.0.1:5000/  
+   ErrorLog /var/log/apache2/DotNetApp-error.log  
+   CustomLog /var/log/apache2/DotNetApp-access.log common  
+</VirtualHost>
+
+sudo vim /etc/systemd/system/kestrel-DotNetApp.service
+
+[Unit]
+Description=AspNet Web App running on Ubuntu
+[Service]
+WorkingDirectory=/var/www/market-app
+ExecStart=/usr/bin/dotnet /var/www/market-app/Market.dll
+Restart=always
+RestartSec=10
+SyslogIdentifier=dotnet-demo
+User=evaadmin
+Environment=ASPNETCORE_ENVIRONMENT=Production
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl enable kestrel-DotNetApp.service  
+sudo systemctl start kestrel-DotNetApp.service
+sudo systemctl status kestrel-DotNetApp.service
+
+sudo systemctl daemon-reload
+
+sudo systemctl restart apache2 
+sudo service apache2 restart
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" http://127.0.0.1:5000/WeatherForecast
+
