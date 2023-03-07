@@ -29,5 +29,11 @@ namespace Market.Controllers
       })
       .ToArray();
     }
+
+    [HttpGet("test")]
+    public IEnumerable<WeatherForecast> Get()
+    {
+      return "This is test message";
+    }
   }
 }

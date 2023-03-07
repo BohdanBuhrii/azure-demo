@@ -49,7 +49,7 @@ sudo systemctl daemon-reload
 sudo systemctl start kestrel-DotNetApp.service
 sudo systemctl status kestrel-DotNetApp.service
 
-systemctl restart apache2 
+sudo systemctl restart apache2 
 sudo service apache2 restart
 
 echo "Finished"
